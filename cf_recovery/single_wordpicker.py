@@ -64,10 +64,9 @@ def M_I(word, path_dimension):
                 "1 and path_dimension."
             )
 
-
     basis_images = []
 
-    # Construct M_I(e_a) separately for a = 1, ..., d.
+    # Construct M_a = M_I(e_a) separately for a = 1, ..., d.
     for a in range(1, path_dimension + 1):
         img_e_a = sp.zeros(word_length + 1)
 
