@@ -44,6 +44,7 @@ def tensor_lift(M, m):
 
     if (
         not isinstance(m, Integral)
+        or isinstance(m, bool)
         or m < 1
     ):
         raise ValueError(
