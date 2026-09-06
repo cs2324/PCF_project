@@ -2,7 +2,7 @@
 
 This code implements the algebraic recovery scheme for
 
-$$
+```math
 Z_\ell(X)
 =
 \sum_{|w|=N} c_w\,\pi_w(S(X)),
@@ -10,7 +10,7 @@ Z_\ell(X)
 \varphi_\ell(\lambda)
 =
 \mathbb E[e^{i\lambda Z_\ell(X)}].
-$$
+```
 
 The coefficients must be real and all words must currently have the same
 length $N$. Thus the implemented scope is **any finite real linear
@@ -22,7 +22,7 @@ deliberately rejected rather than handled incorrectly.
 
 The development expansion is
 
-$$
+```math
 \mathrm{Dev}_{tM}(x)
 =
 I
@@ -31,18 +31,18 @@ I
 \sum_{a_1,\ldots,a_r}
 \pi_{a_1\cdots a_r}(S(x))
 M(e_{a_1})\cdots M(e_{a_r}).
-$$
+```
 
 Therefore the correct design target is the **whole product coefficient**
 
-$$
+```math
 \langle
 u_0,
 M(e_{i_1})\cdots M(e_{i_N})v_N
 \rangle
 =
 c_{i_1\cdots i_N},
-$$
+```
 
 not the isolated action of one matrix $M(e_a)$. `build_picker` starts from
 the required coefficients $c_w$ and constructs matrices satisfying this
@@ -58,13 +58,13 @@ The matrices are $B_a=D_a-D_a^*$, hence skew-Hermitian.
 
 If the base picker acts on $H$, the literal inductive lift is
 
-$$
+```math
 M_{\ell,m}(e_a)
 =
 M_{\ell,m-1}(e_a)\otimes I_H
 +
 I_{H^{\otimes(m-1)}}\otimes M_\ell(e_a).
-$$
+```
 
 This is available with `representation="tensor"`. Its dimension is
 $(\dim H)^m$.
@@ -74,13 +74,13 @@ $v_N^{\otimes m}$, only the symmetric tensor space is needed. The default
 `representation="symmetric"` computes the restriction to $\mathrm{Sym}^m H$,
 whose dimension is
 
-$$
+```math
 \binom{\dim H+m-1}{m}.
-$$
+```
 
 Both versions satisfy
 
-$$
+```math
 \mathbb E[Z_\ell(X)^m]
 =
 \frac{1}{(Nm)!}
@@ -91,7 +91,7 @@ $$
 u_0^{\otimes m},
 \Phi_X(tM_{\ell,m})v_N^{\otimes m}
 \rangle.
-$$
+```
 
 The tests verify that the full tensor recursion and its symmetric compression
 give the same Brownian moments.
@@ -137,11 +137,7 @@ picker = build_picker(
     {(1, 2): 0.5, (2, 1): -0.5},
     alphabet_size=2,
 )
-moments = standard_brownian_moments(
-    picker,
-    maximum_order=6,
-    time=1.0,
-)
+moments = standard_brownian_moments(picker, maximum_order=6, time=1.0)
 ```
 
 Run the demonstration and tests from this directory:
@@ -162,23 +158,20 @@ from pcf_recovery import build_picker
 
 For $I=(1,2)$, the PCF code recovers
 
-$$
-\mu_0=1,
-\qquad
-\mu_2=\frac{T^2}{2},
-\qquad
-\mu_4=\frac{7T^4}{4},
-\qquad
+```math
+\mu_0=1,\quad
+\mu_2=\frac{T^2}{2},\quad
+\mu_4=\frac{7T^4}{4},\quad
 \mu_6=\frac{139T^6}{8},
-$$
+```
 
 with odd moments zero. These are exactly the Taylor coefficients implied by
 
-$$
+```math
 \varphi_{12}(\lambda)
 =
 \bigl(\cosh(\lambda T)\bigr)^{-1/2}.
-$$
+```
 
 This is a PCF/expected-signature check of the explicit formula, independent of
 the conditional-Gaussian/PDE derivation. It verifies every computed Taylor
