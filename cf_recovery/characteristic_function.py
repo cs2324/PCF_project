@@ -62,7 +62,7 @@ class SignatureCharacteristicFunction:
 
     def R_truncation(self, lambda_value, R):
         """Return the finite truncation of the required characteristic
-        function value: sum_(m=0)^R (i*lambda)^m*mu_m/m!, 
+        function value: S_R = sum_(m=0)^R (i*lambda)^m*mu_m/m!, 
         and first R+1 moments [mu_0,...,mu_R].
         """
         R = integer(R, "R")

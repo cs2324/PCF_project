@@ -7,7 +7,7 @@ a finite Taylor polynomial for the characteristic function of
 ```math
 Z=\sum_{j=1}^r c_j\pi_{I_j}(S(X)),\qquad
 \mu_m=\mathbb E[Z^m],\qquad
-P_R(\lambda)=\sum_{m=0}^R\frac{(i\lambda)^m}{m!}\mu_m.
+S_R(\lambda)=\sum_{m=0}^R\frac{(i\lambda)^m}{m!}\mu_m.
 ```
 
 The package is named **`cf_recovery`**. It uses SymPy for exact symbolic
@@ -146,7 +146,7 @@ walkthrough is available in `docs/characteristic_function_walkthrough.md`.
 
 `examples.validate_brownian` computes results along two independent routes:
 
-- **Recovery:** terms -> mixed lifts -> Brownian PCF coefficients -> moments -> $P_R$.
+- **Recovery:** terms -> mixed lifts -> Brownian PCF coefficients -> moments -> $S_R$.
 - **Reference:** an independent scalar CF -> expansion at $\lambda=0$ -> reference moments and polynomial.
 
 Since $\varphi^{(m)}(0)=i^m\mu_m$, the coefficient of $\lambda^m$ in the
