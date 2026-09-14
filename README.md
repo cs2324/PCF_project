@@ -15,10 +15,6 @@ calculations and pytest for tests. The implementation combines single-word
 pickers, mixed tensor lifts, and multinomial expansion. Words may have different
 lengths, so targets such as `S_1 + S_12` are supported.
 
-Shared-prefix pickers, symmetric tensor compression, and Jacobi approximations
-are not implemented here. The `build_picker` and `standard_brownian_moments`
-APIs belong to a different implementation and are not available in this package.
-
 ## 1. Project layout and installation
 
 The project root contains `README.md`, `requirements.txt`, and the following
