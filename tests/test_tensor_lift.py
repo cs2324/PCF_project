@@ -43,13 +43,13 @@ def test_order_two_tensor_lift_on_basis_vectors():
     """
     M = M_I(
         word=(1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
     m = 2
     M_dim = M.matrix_dim
     Id = sp.eye(M_dim)
-    M_lifted_2 = tensor_lift(M=M, m=m)
+    M_lifted_2 = tensor_lift(M_I=M, m=m)
 
     for M_ea, M_lifted_ea in zip(
         M.basis_images,
@@ -72,10 +72,10 @@ def test_order_one_tensor_lift_is_original_map():
     """
     M = M_I(
         word=(1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
-    M_lifted_1 = tensor_lift(M=M, m=1)
+    M_lifted_1 = tensor_lift(M_I=M, m=1)
 
     assert M_lifted_1.domain_dim == M.domain_dim
     assert M_lifted_1.matrix_dim == M.matrix_dim
@@ -91,11 +91,11 @@ def test_lifted_matrix_dimension_is_M_dim_to_power_m():
     """
     M = M_I(
         word=(1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
     m = 3
-    M_lifted_3 = tensor_lift(M=M, m=m)
+    M_lifted_3 = tensor_lift(M_I=M, m=m)
     lifted_dim = M.matrix_dim ** m
 
     assert M_lifted_3.matrix_dim == lifted_dim
@@ -116,10 +116,10 @@ def test_tensor_lift_preserves_skew_hermitian_property():
     """
     M = M_I(
         word=(1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
-    M_lifted_2 = tensor_lift(M=M, m=2)
+    M_lifted_2 = tensor_lift(M_I=M, m=2)
 
     for M_lifted_ea in M_lifted_2.basis_images:
         assert M_lifted_ea.H == -M_lifted_ea
@@ -135,12 +135,12 @@ def test_tensor_lift_evaluation_for_general_x():
     """
     M = M_I(
         word=(1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
     M_dim = M.matrix_dim
     Id = sp.eye(M_dim)
-    M_lifted_2 = tensor_lift(M=M, m=2)
+    M_lifted_2 = tensor_lift(M_I=M, m=2)
 
     x = [2, 3]
     M_x = M(x)
@@ -164,10 +164,10 @@ def test_tensor_lift_recovers_shuffle_multiplicities():
     """
     M = M_I(
         word=(1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
-    M_lifted_2 = tensor_lift(M=M, m=2)
+    M_lifted_2 = tensor_lift(M_I=M, m=2)
     M_lifted_e1 = M_lifted_2.basis_images[0]
     M_lifted_e2 = M_lifted_2.basis_images[1]
 
@@ -204,12 +204,12 @@ def test_tensor_lift_rejects_invalid_orders(invalid_m):
     """
     M = M_I(
         word=(1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
     with pytest.raises(ValueError):
         tensor_lift(
-            M=M,
+            M_I=M,
             m=invalid_m,
         )
 
@@ -220,7 +220,7 @@ def test_tensor_lift_requires_a_linear_map():
     """
     M = M_I(
         word=(1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
     with pytest.raises(TypeError):

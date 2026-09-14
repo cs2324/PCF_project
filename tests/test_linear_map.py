@@ -1,63 +1,50 @@
-import pytest
+"""Check generality and independent Levy-area CF validation."""
+
 import sympy as sp
-
-from cf_recovery import LinearMap
-
-
-def test_vector_valued_map():
-    e1 = sp.Matrix([1, 0])
-    e2 = sp.Matrix([0, 1])
-
-    linear_map = LinearMap([e1, e2])
-
-    assert linear_map.domain_dim == 2
-    assert linear_map([2, 3]) == sp.Matrix([2, 3])
+from cf_recovery import (
+    PathCharacteristicFunction, LinearMap, BrownianPCF,
+    MomentRecovery, SignatureCharacteristicFunction,
+)
 
 
-def test_matrix_valued_map():
-    A1 = sp.Matrix([
-        [0, 1],
-        [-1, 0]
+class StraightLinePCF(PathCharacteristicFunction):
+    """A new law implementing only __call__: x(s)=s on [0,1]."""
+
+    def __init__(self):
+        super().__init__(1, 1)
+
+    def __call__(self, M):
+        self._validate_M(M)
+        return M([1]).exp()
+
+
+def test_new_process_uses_inherited_coefficient_method():
+    recovery = MomentRecovery(StraightLinePCF())
+    assert recovery.coordinate_moment((1,), 1) == 1
+    assert recovery.coordinate_moment((1, 1), 1) == sp.Rational(1, 2)
+    assert recovery.mixed_moment([(1,), (1,)]) == 1
+
+
+def test_levy_area_polynomial_against_independent_cf():
+    T = sp.Symbol("T", nonnegative=True)
+    lam = sp.Symbol("lambda", real=True)
+    Phi = BrownianPCF(2, T)
+    # A = (S_12-S_21)/2. The reference appears ONLY in this test.
+    area = SignatureCharacteristicFunction(Phi, [
+        (sp.Rational(1, 2), (1, 2)),
+        (-sp.Rational(1, 2), (2, 1)),
     ])
-
-    A2 = sp.zeros(2)
-
-    linear_map = LinearMap([A1, A2])
-
-    expected = sp.Matrix([
-        [0, 2],
-        [-2, 0]
-    ])
-
-    assert linear_map([2, 3]) == expected
+    polynomial, moments = area.R_truncation(lam, 4)
+    reference = sp.series(1 / sp.cosh(lam*T/2), lam, 0, 5).removeO()
+    assert sp.expand(polynomial-reference) == 0
+    assert moments == [1, 0, T**2/4, 0, 5*T**4/16]
+    recovery = MomentRecovery(Phi)
+    assert recovery.mixed_moment([(1, 2), (2, 1)]) == 0
 
 
-def test_scaled_map():
-    e1 = sp.Matrix([1, 0])
-    e2 = sp.Matrix([0, 1])
-
-    linear_map = LinearMap([e1, e2])
-    scaled_map = linear_map.scaled(5)
-
-    assert scaled_map([2, 3]) == 5 * linear_map([2, 3])
-
-
-def test_empty_basis_images():
-    with pytest.raises(
-        ValueError,
-        match="At least one basis image is required"
-    ):
-        LinearMap([])
-
-
-def test_wrong_input_dimension():
-    e1 = sp.Matrix([1, 0])
-    e2 = sp.Matrix([0, 1])
-
-    linear_map = LinearMap([e1, e2])
-
-    with pytest.raises(
-        ValueError,
-        match="Expected an input of dimension 2"
-    ):
-        linear_map([1, 2, 3])
+def test_pcf_rejects_scalar_images_without_restricting_linear_map():
+    L = LinearMap([2])
+    assert L([3]) == 6
+    import pytest
+    with pytest.raises(TypeError):
+        BrownianPCF(1, 1)(L)

@@ -39,7 +39,7 @@ def test_picker_for_word_12():
     """
     picker = M_I(
         word=(1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
     expected_M_e1 = sp.Matrix([
@@ -67,7 +67,7 @@ def test_picker_detects_word_order():
     """
     picker = M_I(
         word=(1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
     M_e1 = picker.basis_images[0]
@@ -90,7 +90,7 @@ def test_repeated_letters():
     """
     picker = M_I(
         word=(1, 1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
     expected_M_e1 = sp.Matrix([
@@ -117,7 +117,7 @@ def test_unused_direction_maps_to_zero():
     """
     picker = M_I(
         word=(1, 2),
-        path_dimension=3,
+        path_dim=3,
     )
 
     assert picker.domain_dim == 3
@@ -130,7 +130,7 @@ def test_basis_images_are_skew_hermitian():
     """
     picker = M_I(
         word=(1, 1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
     for image in picker.basis_images:
@@ -144,7 +144,7 @@ def test_linear_map_evaluation():
     """
     picker = M_I(
         word=(1, 2),
-        path_dimension=2,
+        path_dim=2,
     )
 
     expected = (
@@ -170,7 +170,7 @@ def test_invalid_words_are_rejected(invalid_word):
     with pytest.raises(ValueError):
         M_I(
             word=invalid_word,
-            path_dimension=2,
+            path_dim=2,
         )
 
 
@@ -183,11 +183,11 @@ def test_invalid_words_are_rejected(invalid_word):
         True,
     ],
 )
-def test_invalid_path_dimensions_are_rejected(
+def test_invalid_path_dims_are_rejected(
     invalid_dimension,
 ):
     with pytest.raises(ValueError):
         M_I(
             word=(1,),
-            path_dimension=invalid_dimension,
+            path_dim=invalid_dimension,
         )

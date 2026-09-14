@@ -7,7 +7,7 @@ class LinearMap:
     The map is represented by the images of the standard basis vectors:
     L(e_1), ..., L(e_d).
 
-    Elements of V support addition and scalar multiplication.
+    Elements of V support addition and scalar multiplication. 
     """
 
     def __init__(self, basis_images):
@@ -28,15 +28,43 @@ class LinearMap:
 
     @property
     def matrix_dim(self):
-        """Return the size of the square basis-image matrices."""
-        first_image = self.basis_images[0]
+        """Return N when every basis image is an N-by-N matrix.
 
-        if first_image.rows != first_image.cols:
-            raise ValueError(
-                "The basis images must be square matrices."
-            )
+        It checks the rows and cols attributes used by SymPy matrices.
 
-        return first_image.rows
+        Raises
+        ------
+        TypeError
+            A basis image does not expose rows and cols.
+        ValueError
+            A matrix is empty, nonsquare, or has a different size.
+        
+        In particular: require every M_I(e_a) to be a nonempty M_dim-by-M_dim matrix. 
+        For the single-word picker M_I, M_dim = k + 1.
+        Tensor lifting and PCF evaluation use this property to validate matrix
+        sizes and construct identity matrices.
+        """
+        matrix_dim = None
+
+        for image in self.basis_images:
+            if not hasattr(image, "rows") or not hasattr(image, "cols"):
+                raise TypeError(
+                    "matrix_dim requires matrix basis images with rows and cols."
+                )
+
+            if image.rows < 1 or image.rows != image.cols:
+                raise ValueError(
+                    "The basis images must be nonempty square matrices."
+                )
+
+            if matrix_dim is None:
+                matrix_dim = image.rows
+            elif image.rows != matrix_dim:
+                raise ValueError(
+                    "All basis-image matrices must have the same size."
+                )
+
+        return matrix_dim
 
     def __call__(self, x):
         """
