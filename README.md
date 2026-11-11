@@ -1,3 +1,9 @@
+# PCF_project
+
+Python PCF computations and Lean proofs in one repository.
+
+Open `PCF_project.code-workspace` in VS Code. See [workspace and directory guide](docs/WORKSPACE.md) for the layout and Git workflow. The Lean formalization lives in [lean/secant-induction](lean/secant-induction/README.md).
+
 # Scalar characteristic-function recovery from PCF
 
 Given a process PCF `Phi_X` and a finite collection of real coefficients and

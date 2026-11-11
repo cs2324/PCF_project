@@ -1,0 +1,97 @@
+Module: SecantProof.Radial
+Source SHA256: 0b8d2ec5e5bc45e1cf7732356ef2188f4d1d4ce0f71101eb9362ca43f6bb6b5f
+Exit code: 0
+
+Module: SecantProof.Induction
+Source SHA256: 119b573374381d9e1b6fd51b825186d474e4a08c1eb599df1bd3b8b3f2f68938
+Exit code: 0
+
+Module: SecantProof.Secant
+Source SHA256: 9576f3c7331887fb51cb494d6ba6c29202057fe05d3fe245c8420e0c734d477a
+Exit code: 0
+
+Module: SecantProof.SecantValues
+Source SHA256: eab3de23e84dda606ade464fe2b8a81495350c8548176c42f23906e7e1f2ed84
+Exit code: 0
+
+Module: SecantProof.Horizontal
+Source SHA256: dc3cbec2ae6e5f78a102db7cda8cb0da2c274b18bdbaf32705a8d77a31fa904b
+Exit code: 0
+
+Module: SecantProof.Main
+Source SHA256: 19ed615c7402be390912d88c04e536add6b8c59b920dfbbb94e1812e7af165fe
+Exit code: 0
+
+Module: SecantProof
+Source SHA256: 4f2a48a11c823d6874c3b0d6fc1be8617a1e43ec855bec0d50d33f57d111dd66
+Exit code: 0
+
+Module: Audit
+Source SHA256: 50fd97da4601237c07d81c249a8e561b8980b92c0a4cde2ad4266ef1852a727e
+"4.19.0"
+"6caaee842e9495688c1567e78c0e68dbb96942aa"
+SecantProof.mixed_contraction : ∀ (k l : ℕ),
+  SecantProof.Radial.T k l =
+    2 ^ (2 * k + l) * ↑k.factorial * ↑l.factorial * iteratedDeriv (k + l) (fun z => (Real.cos z)⁻¹ * Real.tan z ^ k) 0
+SecantProof.radial_contraction : ∀ (m : ℕ),
+  (MvPolynomial.eval fun x => 0) (SecantProof.Radial.H^[m] (SecantProof.Radial.a ^ m)) =
+    2 ^ m * ↑m.factorial * iteratedDeriv m (fun z => (Real.cos z)⁻¹) 0
+SecantProof.horizontal_contraction : ∀ (m : ℕ),
+  (MvPolynomial.eval fun x => 0) (SecantProof.Horizontal.HH^[m] (SecantProof.Horizontal.a ^ m)) =
+    2 ^ m * ↑m.factorial * iteratedDeriv m (fun z => (Real.cos z)⁻¹) 0
+'SecantProof.Radial.H_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.H_C_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.H_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.iterate_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.iterate_C_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.iterate_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.pd0_monomial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.pd1_monomial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.pd0_twice_monomial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.pd1_twice_monomial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.H_monomial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.T_zero_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.eval_iterate_scaled_monomial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Radial.T_rec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Induction.scale_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Induction.scale_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Induction.mixed_induction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_zero_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.f_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_zero_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_secant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.f_zero_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.f_succ_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.f_contDiffAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_rec_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_rec_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_rec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_vanish' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_eq_zero_of_odd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_odd_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_diagonal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_two_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_four_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Secant.d_six_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.pderiv_commute' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.HH_expansion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.embed_X_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.embed_X_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.embed_r' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.embed_a' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.embed_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.pderiv_embed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.pderiv_zero_embed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.pderiv_one_embed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.pderiv_two_embed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.HH_embed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.iterate_HH_embed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.eval_zero_embed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.eval_iterate_area_general' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.eval_iterate_area' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.Horizontal.eval_iterate_area_eq_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.mixed_contraction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.radial_contraction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SecantProof.horizontal_contraction' depends on axioms: [propext, Classical.choice, Quot.sound]
+Exit code: 0
+
