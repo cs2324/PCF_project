@@ -1,14 +1,15 @@
 # Working in PCF_project
 
-The repository has two main folders:
+The repository has three main folders:
 
 - python_implement/: cf_recovery package, examples, tests, docs and references.
 - lean/: Lean formalizations, currently the secant-induction project.
+- sources/: PDF research papers and notes.
 
 README.md, .gitignore and PCF_project.code-workspace remain at the repository
 root. The hidden .git directory stores repository history.
 
-Open PCF_project.code-workspace in VS Code. Its two entries open the Python
+Open PCF_project.code-workspace in VS Code. Its entries open the PDF sources, Python
 and Lean folders. A workspace is an editor configuration, not a separate
 repository. Both folders belong to https://github.com/cs2324/PCF_project.git.
 
@@ -36,5 +37,5 @@ Moving files locally does not itself commit or upload them.
 
 The sibling secant-induction-lean folder is the retained original copy.
 Use this repository's lean/secant-induction for future proof edits.
-PDFs and general_cf(1).ipynb in the parent pcf directory remain outside this
+PDFs from the parent pcf/sources directory are copied into sources/ in this repository. Original files are retained. The notebook general_cf(1).ipynb remains outside this
 repository. Lean verification reports are historical records, not new runs.

@@ -1,7 +1,19 @@
 {
-  "folders": [
-    { "name": "Python implementation", "path": "python_implement" },
-    { "name": "Lean proofs", "path": "lean" }
-  ],
-  "settings": {}
+    "folders":  [
+                    {
+                        "name":  "Python implementation",
+                        "path":  "python_implement"
+                    },
+                    {
+                        "name":  "Lean proofs",
+                        "path":  "lean"
+                    },
+                    {
+                        "name":  "PDF sources",
+                        "path":  "sources"
+                    }
+                ],
+    "settings":  {
+
+                 }
 }
