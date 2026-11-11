@@ -1,1 +1,7 @@
-{"folders":[{"name":"PCF_project","path":"."},{"name":"Secant induction (Lean)","path":"lean/secant-induction"}],"settings":{}}
+{
+  "folders": [
+    { "name": "Python implementation", "path": "python_implement" },
+    { "name": "Lean proofs", "path": "lean" }
+  ],
+  "settings": {}
+}
